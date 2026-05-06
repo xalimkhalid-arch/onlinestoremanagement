@@ -1,20 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Online Store</title>
-</head>
-<body>
-    <h1>All Products</h1>
-    {% for product in products %}
-        <div>
-            <h2>{{ product.name }}</h2>
-            <p>Price: ${{ product.price }}</p>
-            <p>Stock: {{ product.stock }}</p>
-            <a href="{% url 'product_detail' product.pk %}">View Details</a>
-        </div>
-        <hr>
-    {% empty %}
-        <p>No products available.</p>
-    {% endfor %}
-</body>
-</html>
+{% extends 'store/base.html' %}
+{% block title %}All Products{% endblock %}
+
+{% block content %}
+<h1>All Products</h1>
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Product Name</th>
+            <th>Price (KSh)</th>
+            <th>Quantity in Store</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ product.name }}</td>
+            <td>KSh {{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>
+                <a href="{% url 'product_detail' product.id %}">
+                    View Details
+                </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No products available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

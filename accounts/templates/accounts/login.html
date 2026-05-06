@@ -1,17 +1,110 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
+{% extends 'store/base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<style>
+    .auth-container {
+        max-width: 400px;
+        margin: 50px auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 40px;
+    }
+    .auth-title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    .auth-subtitle {
+        text-align: center;
+        color: #888;
+        margin-bottom: 30px;
+        font-size: 14px;
+    }
+    .auth-container p label {
+        font-weight: bold;
+        color: #333;
+        display: block;
+        margin-bottom: 5px;
+        margin-top: 15px;
+    }
+    .auth-container input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 15px;
+        box-sizing: border-box;
+        transition: border 0.3s;
+    }
+    .auth-container input:focus {
+        border-color: #333;
+        outline: none;
+    }
+    .auth-btn {
+        width: 100%;
+        padding: 13px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 25px;
+        transition: background 0.3s;
+    }
+    .auth-btn:hover {
+        background-color: #555;
+    }
+    .auth-footer {
+        text-align: center;
+        margin-top: 20px;
+        color: #888;
+        font-size: 14px;
+    }
+    .auth-footer a {
+        color: #333;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .auth-footer a:hover {
+        text-decoration: underline;
+    }
+    .error-list {
+        background: #ffe0e0;
+        border-left: 4px solid red;
+        padding: 10px 15px;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        color: red;
+        font-size: 14px;
+    }
+</style>
+
+<div class="auth-container">
+    <div class="auth-title"> Welcome Back</div>
+    <div class="auth-subtitle">Login to your account</div>
+
+    {% if form.errors %}
+    <div class="error-list">
+        Invalid username or password. Please try again.
+    </div>
+    {% endif %}
+
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Login</button>
+        <button class="auth-btn" type="submit">
+            Login →
+        </button>
     </form>
-    <p>No account yet? 
-        <a href="{% url 'register' %}">Register</a>
-    </p>
-</body>
-</html>
+
+    <div class="auth-footer">
+        No account yet?
+        <a href="{% url 'register' %}">Register here</a>
+    </div>
+</div>
+{% endblock %}
