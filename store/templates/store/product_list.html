@@ -2,8 +2,38 @@
 {% block title %}All Products{% endblock %}
 
 {% block content %}
+<style>
+    h1 {
+        color: blue;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 2px solid red;
+    }
+    th {
+        background-color: red;
+        color: white;
+        padding: 10px;
+    }
+    th:nth-child(2) {
+        color: blue;
+    }
+    td {
+        padding: 10px;
+        border: 1px solid red;
+    }
+    tr:nth-child(even) {
+        background-color: #ffe5e5;
+    }
+    .product-name {
+        color: blue;
+        font-weight: bold;
+    }
+</style>
+
 <h1>All Products</h1>
-<table border="1" cellpadding="10" cellspacing="0">
+<table>
     <thead>
         <tr>
             <th>#</th>
@@ -17,7 +47,7 @@
         {% for product in products %}
         <tr>
             <td>{{ forloop.counter }}</td>
-            <td>{{ product.name }}</td>
+            <td class="product-name">{{ product.name }}</td>
             <td>KSh {{ product.price }}</td>
             <td>{{ product.stock }}</td>
             <td>
