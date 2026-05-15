@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}Online Store{% endblock %}</title>
+    <title>{% block title %}ONLINE STORE{% endblock %}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,8 +67,26 @@
         <span style="color:white;">
             Hello, {{ user.username }}
         </span>
+    {% endif %}
         &nbsp;
-        <a href="{% url 'user_logout' %}">Logout</a>
+    {% if user.is_authenticated %}
+    <span style="color: white; margin-right: 15px;">
+         {{ user.username }}
+    </span>
+    <a href="{% url 'my_messages' %}"
+       style="color: white; 
+              margin-right: 15px;
+              text-decoration: none;">
+         My Messages
+    </a>
+    <a href="{% url 'user_logout' %}"
+       style="background-color: #e74c3c;
+              padding: 7px 15px;
+              border-radius: 5px;
+              color: white;
+              text-decoration: none;">
+         Logout
+    </a>
     {% else %}
         <a href="{% url 'user_login' %}">Login</a>
         <a href="{% url 'register' %}">Register</a>
